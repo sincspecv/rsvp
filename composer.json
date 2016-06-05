@@ -1,0 +1,6 @@
+
+{
+    "require": {
+        "plivo/plivo-php": "^1.0"
+    }
+}
