@@ -6,8 +6,7 @@ session_start();
 //Error Reporting
 ini_set('display_errors', 1);
 
-require_once('lib/config.php');
-require_once('lib/classes.php');
+require __DIR__ . '/vendor/autoload.php';
 
 // Check DB connection_status
 

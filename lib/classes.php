@@ -1,6 +1,8 @@
 <?php
 namespace TheFancyRobot\RSVP;
 use \PDO;
+
+require_once('config.php');
 /*
 * Database Object
 */

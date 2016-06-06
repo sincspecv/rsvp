@@ -10,8 +10,7 @@ use Plivo\RestAPI;
 $auth_id = "MAODLMYTLJODEYNZUZNG";
 $auth_token = "ZTZmZGNjOTYwZTg5NjUzMDk3Y2MwOTM0YTFhYTFm";
 
-require_once('lib/config.php');
-require_once('lib/classes.php');
+require __DIR__ . '/vendor/autoload.php';
 
 // Sender's phone numer
 $fromNumber = $_POST['From'];

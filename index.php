@@ -2,7 +2,7 @@
 namespace TheFancyRobot\RSVP;
 session_start();
 
-require('lib/functions.php');
+require __DIR__ . '/vendor/autoload.php';
 
 printHTMLHead();
 
