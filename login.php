@@ -1,11 +1,13 @@
 <?php
 namespace TheFancyRobot\RSVP;
-
+/*******
 session_start();
 
 ini_set('display_errors', 1);
 
-require __DIR__ . '/vendor/autoload.php';
+
+*********/
+include('header.php');
 
 $username = strtolower(trim($_POST['username']));
 $password = $_POST['password'];
