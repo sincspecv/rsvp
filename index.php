@@ -1,13 +1,6 @@
 <?php
 namespace TheFancyRobot\RSVP;
 
-/****
-session_start();
-
-require __DIR__ . '/vendor/autoload.php';
-
-printHTMLHead();
-****/
 include('header.php');
 
 if (isset($_SESSION['agent']) && $_SESSION['agent'] == md5($_SERVER['HTTP_USER_AGENT'])) {
