@@ -86,23 +86,16 @@ class DatabaseConnection {
   }
 
   public function checkForTable($table) {
-    /**
-    $this->result = $this->dbConnect->query("SHOW TABLES LIKE '$table'");
-    return $this->result->rowCount();
-
-    if ($this->result => 0) {
-      return TRUE;
-    } else {
-      return FALSE;
-    }
-    **/
-    $this->preparedQuery("SHOW TABLES from $this->dbname LIKE '$table'");
+    $this->preparedQuery("SHOW TABLES FROM $this->dbname LIKE '$table'");
     $this->result = $this->execute();
 
-    if (!$this->result) {
-      return FALSE;
-    } else {
-      return TRUE;
-    }
+    if ($this->result) {
+      $rows = $this->stmt->fetch(PDO::FETCH_NUM);
+      if ($rows[0]) {
+        return TRUE; //Table was found 
+      } else {
+        return FALSE; //Table was not found
+      } 
+    }  
   }
 }
