@@ -4,13 +4,13 @@ namespace TheFancyRobot\RSVP;
 ini_set('display_errors', 1);
 
 //Plivo API
-require_once('vendor/autoload.php');
+require __DIR__ . '/vendor/autoload.php';
 use Plivo\RestAPI;
 
 $auth_id = "MAODLMYTLJODEYNZUZNG";
 $auth_token = "ZTZmZGNjOTYwZTg5NjUzMDk3Y2MwOTM0YTFhYTFm";
 
-require __DIR__ . '/vendor/autoload.php';
+
 
 // Sender's phone numer
 $fromNumber = $_POST['From'];
@@ -28,7 +28,8 @@ $response = new RestAPI($auth_id, $auth_token);
 if ($sessionExists == TRUE) {
 	$step = $smsSession->getStep($fromNumber);
 } else {
-	$smsSession->createSMSSession($fromNumber);
+	$eventCode = strtoupper($text);
+	$smsSession->createSMSSession($fromNumber, $eventCode);
 	$step = $smsSession->getStep($fromNumber);
 }
 

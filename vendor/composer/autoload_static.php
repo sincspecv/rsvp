@@ -140,11 +140,11 @@ class ComposerStaticInit9bd9570c0cb8928b0136914babafa78b
         'Psr\\Http\\Message\\StreamInterface' => __DIR__ . '/..' . '/psr/http-message/src/StreamInterface.php',
         'Psr\\Http\\Message\\UploadedFileInterface' => __DIR__ . '/..' . '/psr/http-message/src/UploadedFileInterface.php',
         'Psr\\Http\\Message\\UriInterface' => __DIR__ . '/..' . '/psr/http-message/src/UriInterface.php',
-        'TheFancyRobot\\RSVP\\DatabaseConnection' => __DIR__ . '/../..' . '/lib/classes.php',
-        'TheFancyRobot\\RSVP\\Event' => __DIR__ . '/../..' . '/lib/classes.php',
-        'TheFancyRobot\\RSVP\\SMS' => __DIR__ . '/../..' . '/lib/classes.php',
-        'TheFancyRobot\\RSVP\\Session' => __DIR__ . '/../..' . '/lib/classes.php',
-        'TheFancyRobot\\RSVP\\User' => __DIR__ . '/../..' . '/lib/classes.php',
+        'TheFancyRobot\\RSVP\\DatabaseConnection' => __DIR__ . '/../..' . '/lib/db.class.php',
+        'TheFancyRobot\\RSVP\\Event' => __DIR__ . '/../..' . '/lib/event.class.php',
+        'TheFancyRobot\\RSVP\\SMS' => __DIR__ . '/../..' . '/lib/sms.class.php',
+        'TheFancyRobot\\RSVP\\Session' => __DIR__ . '/../..' . '/lib/session.class.php',
+        'TheFancyRobot\\RSVP\\User' => __DIR__ . '/../..' . '/lib/user.class.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
