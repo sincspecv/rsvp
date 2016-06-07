@@ -84,7 +84,7 @@ class SMS extends DatabaseConnection {
 
     $this->eventCode = $this->result['event_code'];
     
-    $this->preparedQuery("INSERT INTO `$this->eventCode` (guest_name, add_guest) VALUES (:guest_name, :add_guest");
+    $this->preparedQuery("INSERT INTO $this->eventCode (guest_name, add_guest) VALUES (:guest_name, :add_guest)");
     $this->bind(':guest_name', $this->result['guest_name']);
     $this->bind(':add_guest', $this->result['add_guest']);
     $this->execute(); 

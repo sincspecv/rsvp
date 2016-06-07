@@ -28,8 +28,7 @@ $response = new RestAPI($auth_id, $auth_token);
 if ($sessionExists == TRUE) {
 	$step = $smsSession->getStep($fromNumber);
 } else {
-	$eventCode = strtoupper($text);
-	$smsSession->createSMSSession($fromNumber, $eventCode);
+	$smsSession->createSMSSession($fromNumber);
 	$step = $smsSession->getStep($fromNumber);
 }
 

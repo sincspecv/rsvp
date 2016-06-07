@@ -86,13 +86,23 @@ class DatabaseConnection {
   }
 
   public function checkForTable($table) {
+    /**
     $this->result = $this->dbConnect->query("SHOW TABLES LIKE '$table'");
     return $this->result->rowCount();
 
-    if ($this->result > 0) {
+    if ($this->result => 0) {
       return TRUE;
     } else {
       return FALSE;
+    }
+    **/
+    $this->preparedQuery("SHOW TABLES from $this->dbname LIKE '$table'");
+    $this->result = $this->execute();
+
+    if (!$this->result) {
+      return FALSE;
+    } else {
+      return TRUE;
     }
   }
 }
