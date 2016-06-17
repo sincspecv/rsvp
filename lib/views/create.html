@@ -1,0 +1,73 @@
+
+<div class="col-sm-10" ng-controller="eventFormController">
+     <div>
+          <a href ng-click="changeView('dashboard')"><<< Return to Dashboard</a>
+     </div>
+     <form role="form" name="eventForm" class="form-horizontal" ng-submit="submitForm(eventForm.$valid)" method="POST" id="register" novalidate>
+          <div class="col-sm-8 col-sm-offset-7">
+               <div class="form-group">
+
+               <h3>Primary Host</h3>
+
+               <!-- FIRST NAME -->
+               <div ng-class="{ 'has-error' : eventForm.pHostFirstName.$touched && eventForm.pHostFirstName.$invalid }" class="form-group ">
+                    <label for="pHostFirstName" class="control-label">First Name:</label> 
+                    <span class="alert" ng-show="eventForm.pHostFirstName.$touched && eventForm.pHostFirstName.$invalid">This field is required.</span>
+                    <input type="text" class="form-control" name="pHostFirstName" id="pHostFirstName" value="" ng-model="formData.pHostFirstName" required>
+               </div>
+
+               <!-- LAST NAME -->
+               <div ng-class="{ 'has-error' : eventForm.pHostLastName.$touched && eventForm.pHostLastName.$invalid }" class="form-group ">
+                    <label for="pHostLastName" class="control-label">Last Name:</label> 
+                    <span class="alert" ng-show="eventForm.pHostLastName.$touched && eventForm.pHostLastName.$invalid">This field is required.</span>
+                    <input type="text" class="form-control" name="pHostLastName" id="pHostLastName" ng-model="formData.pHostLastName" value="" required>
+               </div>
+
+               <h3>Second Host</h3>
+
+               <!-- FIRST NAME -->
+               <div class="form-group ">
+                    <label for="sHostFirstName" class="control-label">First Name:</label> 
+                    <input type="text" class="form-control" name="sHostFirstName" id="sHostFirstName" value="" ng-model="formData.sHostFirstName" >
+               </div>
+
+               <!-- LAST NAME -->
+               <div class="form-group ">
+                    <label for="sHostLastName" class="control-label">Last Name:</label> 
+                    <input type="text" class="form-control" name="sHostLastName" id="sHostLastName" value="" ng-model="formData.sHostLastName" >
+               </div>
+
+               <h3>Event Info</h3>
+
+               <!-- EVENT NAME -->
+               <div ng-class="{ 'has-error' : eventForm.eventName.$touched && eventForm.eventName.$invalid }" class="form-group ">
+                    <label for="eventName" class="control-label">Event Name:</label> 
+                    <span class="alert" ng-show="eventForm.eventName.$touched && eventForm.eventName.$invalid">This field is required.</span>
+                    <input type="text" class="form-control" name="eventName" id="eventName" ng-model="formData.eventName" value="" required>
+               </div>
+
+               <!-- EVENT DATE -->
+               <div ng-class="{ 'has-error' : eventForm.eventDate.$touched && eventForm.eventDate.$invalid }" class="form-group ">
+                    <label for="eventDate" class="control-label">Event Date:</label> 
+                    <span class="alert" ng-show="eventForm.eventDate.$touched && eventForm.eventDate.$invalid">This field is required.</span>
+                    <input type="date" class="form-control" name="eventDate" id="eventDate" ng-model="formData.eventDate" value="mm/dd/yyyy" required>
+               </div>               
+
+               <!-- SUBMIT BUTTON -->
+               <button type="submit" class="btn btn-default" ng-disabled="eventForm.$invalid">Submit</button>
+
+               <!--
+               <h4>Primary Host (required)</h4><br />
+               First Name: <input type="text" name="pHostFirstName" id="pHostFirstName" value="' . $firstName . '">
+               Last Name: <input type="text" name="pHostLastName" id="pHostLastName" value="' . $lastName . '"><br />
+               <h4>Additional Host (optional)</h4>
+               First Name: <input type="text" name="sHostFirstName" id="sHostFirstName" value="">
+               Last Name: <input type="text" name="sHostLastName" id="sHostLastName" value=""><br />
+               <h2>Event Info</h2><br />
+               Event Name: <input type="text" name ="eventName" id="eventName">
+               Date: <input type="date" name="eventDate" id="eventDate" value="mm/dd/yyyy"><br />
+               <input type="submit" name="submit" value="Submit"> -->
+               </div>
+          </div>
+     </form>
+</div>

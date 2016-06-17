@@ -1,0 +1,9 @@
+      <div class="alert alert-info col-sm-10 col-sm-offset-4 text-center reg-success">
+            <strong>Welcome Back {{ user.first_name }}!</strong><br />
+            <p>This is your dashboard. You can create and manage your events here.</p>
+      </div>
+      <div class="col-sm-16" ng-controller="eventController">
+      	<div ng-if="events == null">
+      	<p><h3>You have not created any events. <a href ng-click="changeView('create')">Click here to create an event.</a></h3></p>
+      	</div>
+      </div>
