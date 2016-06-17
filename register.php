@@ -3,26 +3,18 @@ namespace TheFancyRobot\RSVP;
 
 include('header.php');
 
-// Check DB connection_status
-
-$user = new User();
-
-//Get user info from POST array
-$username = filter_var(trim($_POST['username']), FILTER_SANITIZE_STRING);
-$password = trim($_POST['password']);
-$firstname = trim($_POST['firstname']);
-$lastname = trim($_POST['lastname']);
-$email = trim($_POST['email']);
-$userPhone = trim($_POST['userphone']);
-
-//Enter info into DB
-$user->createUser($username, $password, $firstname, $lastname, $email, $userPhone);
-
-
-//Session Variables
-$sessionArray = array('username' => $username, 'firstname' => $firstname, 'lastname' => $lastname);
-Session::createSession($sessionArray);
-
-//Redirect
-header("Location: " . $url . "account.php");
 ?>
+
+ 
+  <div class="row form-background" id="rform"> 
+   <div class="row text-center" id="title" class="title">
+    <img src="lib/img/rsvpd_logo.png">
+  </div>
+    <div class="col-sm-8" ng-app="regForm" ng-controller="formController" ui-view> 
+      
+    </div>
+  </div>
+
+  <script src="lib/js/regform.js"></script>
+
+<?=include('footer.php');?>

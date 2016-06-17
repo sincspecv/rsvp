@@ -33,7 +33,8 @@ do {
 $eventCode = $eventCode; //make sure $eventCode doesn't change
 $event->createEvent($username, $eventCode, $pHostName, $sHostName, $eventName, $eventDate);
 
-//$_SESSION['event_code'] = $eventCode;
+$_SESSION['event_codes'][] = $eventCode;
+//array_push($_SESSION['event_codes'], $eventCode);
 
 header("Location: " . $url . "account.php");
 

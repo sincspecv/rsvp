@@ -5,7 +5,10 @@
     },
     "autoload": {
         "psr-4": {
-        	"TheFancyRobot\\": "lib/"
+        	"TheFancyRobot\\": "lib/classes/"
         }
+    },
+    "require": {
+      "josegonzalez/dotenv": "dev-master"
     }
 }

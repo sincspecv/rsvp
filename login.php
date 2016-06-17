@@ -1,19 +1,13 @@
 <?php
 namespace TheFancyRobot\RSVP;
-/*******
-session_start();
 
-ini_set('display_errors', 1);
-
-
-*********/
 include('header.php');
 
 $username = strtolower(trim($_POST['username']));
 $password = $_POST['password'];
 
 $user = new User();
-$userInfo = $user->GetUserInfo($username);
+$userInfo = $user->GetUserInfo($username); //Get user info from database
 
 //Check for valid username
 if (!$userInfo) {
@@ -22,14 +16,13 @@ if (!$userInfo) {
     echo 'location.href="login.htm";';
     echo '</script>';
 } else {
-    //Fetch username, password, and salt from db and return as string
+    //User info from db as array $userInfo
     $dbUsername = $userInfo['username'];
     $dbPassword = $userInfo['password'];
-    $salt = $userInfo['salt'];
 
-    $login = $user->login($username, $dbUsername, $password, $dbPassword, $salt);
+    $checkPassword = $user->checkPassword($password, $dbPassword);
 
-    if ($login = TRUE) {
+    if ($checkPassword = TRUE) { //If password is a match, create session
         Session::createSession($userInfo);
         header("Location: " . $url . "account.php");
     } else {
