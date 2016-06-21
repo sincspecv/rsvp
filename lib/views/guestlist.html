@@ -1,0 +1,42 @@
+
+	  <div class="modal-header">
+	      <strong>{{ events.event_name }}</strong>
+	  </div>
+	  <div class="modal-body">
+		  <label for="guestForm">Add Guest:</label>
+		  <form role="form" name="guestForm" class="form-horizontal" ng-submit="submitForm(guestForm.$valid)" ng-init="formData.eventCode=events.event_code" id="addGuest" novalidate>
+	           
+	               <!-- GUEST NAME -->
+	               <div ng-class="{ 'has-error' : guestForm.guestName.$touched && guestForm.guestName.$invalid }" class="form-group col-sm-6">
+	                    <span class="alert" ng-show="guestForm.guestName.$touched && guestForm.guestName.$invalid">This field is required.</span>
+	                    <input type="text" class="form-control" name="guestName" id="guestName" value="" placeholder="First and Last Name" ng-model="formData.guestName" required>
+	               </div>
+
+	               <!-- ADDITIONAL GUESTS -->
+	               <div ng-class="{ 'has-error' : guestForm.addGuest.$touched && guestForm.addGuest.$invalid }" class="form-group col-sm-3">
+	                    <span class="alert" ng-show="guestForm.addGuest.$touched && guestForm.addGuest.$invalid">This field is required.</span>
+	                    <input type="text" class="form-control" name="addGuest" id="addGuest" value="" placeholder="Additional Guests" ng-model="formData.addGuest" required>
+	               </div>
+
+	               <!-- SUBMIT BUTTON -->
+	               <button type="submit" class="btn btn-info btn-sm" ng-disabled="guestForm.$invalid">Submit</button>
+
+	      </form>
+      </div>
+	  <div class="modal-body">
+      	<div id="guestlist" class="guestlist table-responsive">
+            <table id="gltable" class="table table-striped">
+                <tr>
+	                <th>Guest Name</th>
+	                <th>Additional Guests</th>
+                </tr>
+    			<tr ng-repeat="guests in events.guest_list">
+	                <td>{{ guests.guest_name }}</td>
+	                <td>{{ guests.add_guest }}</td>
+              </tr>
+      		</table>
+        </div>
+	  </div>
+	  <div class="modal-footer">
+          <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+      </div>

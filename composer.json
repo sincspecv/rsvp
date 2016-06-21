@@ -1,14 +1,12 @@
 
 {
     "require": {
-        "plivo/plivo-php": "^1.0"
+        "plivo/plivo-php": "^1.0",
+        "josegonzalez/dotenv": "dev-master"
     },
     "autoload": {
         "psr-4": {
         	"TheFancyRobot\\": "lib/classes/"
         }
-    },
-    "require": {
-      "josegonzalez/dotenv": "dev-master"
     }
 }

@@ -10,6 +10,16 @@ body {
   background-repeat: no-repeat;
 }
 
+li {
+  list-style: none;
+}
+
+ul {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+}
+
 .form-signin {
   max-width: 330px;
   padding: 15px;

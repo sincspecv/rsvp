@@ -4,7 +4,7 @@ namespace TheFancyRobot\RSVP;
 ini_set('display_errors', 1);
 
 //Plivo API
-require __DIR__ . '/vendor/autoload.php';
+require_once('bootstrap.php');
 use Plivo\RestAPI;
 
 $auth_id = "MAODLMYTLJODEYNZUZNG";

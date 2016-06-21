@@ -61,17 +61,21 @@ class User extends DatabaseConnection {
     //Get user info using prepared statement
     $this->preparedQuery("SELECT * FROM users WHERE username = :username");
     $this->bind(':username', $username);
-    $this->execute();
     $this->userInfo = $this->getSingleRow();
 
     //Get event codes
     $this->preparedQuery("SELECT event_code FROM events where userid = :userid");
     $this->bind(':userid', $this->userInfo['userid']);
-    $this->eventInfo = $this->getSingleRow();
+    $this->eventInfo = $this->getAllRows();
 
     //Merge info into single array
     
-    $this->userInfo['event_codes'] = $this->eventInfo['event_code'];
+    $this->userInfo['event_codes'] = $this->eventInfo;
+
+    $this->userInfo['event_codes'] = array_map(function($eventCode) {
+      return $eventCode['event_code'];
+    }, $this->userInfo['event_codes'] );
+
 
     //return user info as array
     return $this->userInfo;

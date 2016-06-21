@@ -3,7 +3,7 @@
      <div>
           <a href ng-click="changeView('dashboard')"><<< Return to Dashboard</a>
      </div>
-     <form role="form" name="eventForm" class="form-horizontal" ng-submit="submitForm(eventForm.$valid)" method="POST" id="register" novalidate>
+     <form role="form" name="eventForm" class="form-horizontal" ng-submit="submitForm(eventForm.$valid, 'lib/create.php')" method="POST" id="register" novalidate>
           <div class="col-sm-8 col-sm-offset-7">
                <div class="form-group">
 
@@ -56,17 +56,6 @@
                <!-- SUBMIT BUTTON -->
                <button type="submit" class="btn btn-default" ng-disabled="eventForm.$invalid">Submit</button>
 
-               <!--
-               <h4>Primary Host (required)</h4><br />
-               First Name: <input type="text" name="pHostFirstName" id="pHostFirstName" value="' . $firstName . '">
-               Last Name: <input type="text" name="pHostLastName" id="pHostLastName" value="' . $lastName . '"><br />
-               <h4>Additional Host (optional)</h4>
-               First Name: <input type="text" name="sHostFirstName" id="sHostFirstName" value="">
-               Last Name: <input type="text" name="sHostLastName" id="sHostLastName" value=""><br />
-               <h2>Event Info</h2><br />
-               Event Name: <input type="text" name ="eventName" id="eventName">
-               Date: <input type="date" name="eventDate" id="eventDate" value="mm/dd/yyyy"><br />
-               <input type="submit" name="submit" value="Submit"> -->
                </div>
           </div>
      </form>

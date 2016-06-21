@@ -15,6 +15,8 @@ class Event extends DatabaseConnection {
 
   public $eventCode;
   public $guestList;
+  public $eventInfoArray;
+  public $guestCount;
 
   /**
    * Add guest to guest list
@@ -23,9 +25,9 @@ class Event extends DatabaseConnection {
    * @param string $lastName  Last name of guest
    * @param string $addGuests Number of additional guests
    */
-  public function addToGuestList($eventCode, $firstName, $lastName, $addGuests) {
+  public function addToGuestList($eventCode, $guestName, $addGuests) {
     $this->eventCode = $eventCode;
-    $this->guestName =  $firstName . ' ' . $lastName;
+    $this->guestName = $guestName;
     $this->addGuests = $addGuests;
 
     if (strlen($this->eventCode) > 8 || !preg_match('/\D{4}\d{4}/', $this->eventCode)) { //If eventCode is more than eight characters or not 4 letters followed by 4 numbers
@@ -234,7 +236,7 @@ class Event extends DatabaseConnection {
 
         //Add second host if provided 
         if ($sHostName != " ") {
-          $this->preparedQuery("INSERT INTO $eventCode (guest_name, add_guest) VALUES ( :guestname, :addguests)");
+          $this->preparedQuery("INSERT INTO $eventCode (guest_name, add_guest) VALUES (:guestname, :addguests)");
           $this->bind(':guestname', $sHostName);
           $this->bind(':addguests', '0');
           $this->execute();
@@ -245,4 +247,28 @@ class Event extends DatabaseConnection {
       }
     }
   } 
+
+  public function getEventInfo() {
+
+    $this->eventCodes = $_SESSION['event_codes'];
+
+    
+
+    while(list($key, $value) = each($this->eventCodes)) {
+      $this->preparedQuery("SELECT * FROM events WHERE event_code = :eventCode");
+      $this->bind(':eventCode', $value);
+      $this->eventInfo = $this->getSingleRow();
+      $this->eventInfoArray['events'][] = $this->eventInfo;
+
+      //Add guest count to array
+      $this->guestCount = $this->getGuestCount($value);
+      $this->eventInfoArray['events'][$key]['guest_count'] = $this->guestCount;
+
+      //add guest list to array
+      $this->guestList = $this->getGuestList($value);
+      $this->eventInfoArray['events'][$key]['guest_list'] = $this->guestList;
+    }
+   
+    return $this->eventInfoArray;
+  }
 }
