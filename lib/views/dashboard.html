@@ -1,13 +1,13 @@
-      <div class="alert alert-info col-sm-10 col-sm-offset-4 text-center reg-success">
+      <div class="well col-sm-10 col-sm-offset-4 text-center reg-success">
             <strong>Welcome Back {{ user.first_name }}!</strong><br />
             <p>This is your dashboard. You can create and manage your events here.</p>
       </div>
-      <div class="col-sm-16" ng-controller="eventController">
+      <div class="col-sm-12 col-sm-offset-3" ng-controller="eventController">
       	<div ng-if="events == ''">
       	<p><h3>You have not created any events. <a href ng-click="changeView('create')">Click here to create an event.</a></h3></p>
       	</div>
       	<div ng-if="events != ''">
-	      	<div class="text-center">
+	      	<div id="event-header" class="text-center">
 	      		<h2>Events</h2>
 	      	</div>
 	      	<div id="eventCodes" ng-repeat="events in eventInfo.events" ng-controller="modalController">
@@ -31,8 +31,12 @@
                               </div>
                         </div>
 	      	</div>
-	      	<div>
-	      	    <a href ng-click="changeView('create')">&#91; + &#93; Create another event</a>
-	      	</div>
+                  <div id="add-event" class="btn btn-lg">
+                        <a href ng-click="changeView('create')">&#91; + &#93; Create new Event</a>
+                  </div>
+                  <div id="logout" class="btn btn-lg">
+                        <a href="logout.php">Logout</a>
+                  </div>
       	</div>
+
       </div>

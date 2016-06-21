@@ -3,10 +3,6 @@ body {
   padding-bottom: 40px;
   background-color: #eee;
   background-image: url('../img/unsplash_party_bg.jpg');
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -74,4 +70,13 @@ ul {
 .reg-success {
   margin-top: 60px;
   margin-bottom: 40px;
+}
+
+#logout {
+  display: inline-block;
+  float: right;
+}
+
+#event-header {
+  color: #F0FCFC;
 }
