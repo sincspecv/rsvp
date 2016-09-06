@@ -1,6 +1,7 @@
 <?php
 namespace TheFancyRobot\RSVP;
 use \PDO;
+use Respect\Validation\Validator as v;
 
 class SMS extends DatabaseConnection {
   private $eventExists;
@@ -101,12 +102,56 @@ class SMS extends DatabaseConnection {
    * @param  string $phoneNumber Phone number
    * @param  string $addGuests   Number of addtional guests
    */
-    public function processStepThree($phoneNumber, $addGuests) {
+  public function processStepThree($phoneNumber, $addGuests) {
     $this->step = 4;
     $this->preparedQuery("UPDATE sms SET add_guest = :add_guest, step = :step WHERE phone_number = :phone_number");
     $this->bind(':add_guest', $addGuests);
     $this->bind(':step', $this->step);
     $this->bind(':phone_number', $phoneNumber);
+    $this->execute();
+  }
+
+/**
+ * Check if guest has already registered for this event
+ * @param  string $phoneNumber Phone Number
+ * @param  string $smsText     SMS content
+ * @return boolean
+ */
+  public function checkIfRegistered($phoneNumber, $smsText) {
+    $this->preparedQuery("SELECT * FROM sms WHERE phone_number = :phone_number");
+    $this->bind(':phone_number', $phoneNumber);
+    $this->execute();
+    $this->result = $this->getSingleRow();
+
+    if (v::stringType()->length(8, 8)->validate($smsText)) {
+      $this->eventCode = strtoupper($smsText);
+      $this->preparedQuery("SELECT * FROM $this->eventCode WHERE guest_phone = :guest_phone");
+      $this->bind(':guest_phone', $phoneNumber);
+      $this->execute();
+      $this->result = $this->getSingleRow();
+
+      if (!empty($this->result)) {
+        return TRUE;
+      } else {
+        return FALSE;
+      }
+    } else {
+      return FALSE;
+    }
+  }
+
+  /**
+   * Reset data for SMS session to allow new registration
+   * @param  string $phoneNumber Phone number of registrant
+   * @return none              
+   */
+  public function refreshSMSSession($phoneNumber) {
+    $this->step = 1;
+    $this->preparedQuery("UPDATE sms SET event_code = :event_code, guest_name = :guest_name, add_guest = :add_guest, step = :step WHERE phone_number = $phoneNumber");
+    $this->bind(':event_code', '');
+    $this->bind(':guest_name', '');
+    $this->bind(':add_guest', '');
+    $this->bind(':step', $this->step);
     $this->execute();
   }
 
@@ -122,9 +167,12 @@ class SMS extends DatabaseConnection {
 
     $this->eventCode = $this->result['event_code'];
     
-    $this->preparedQuery("INSERT INTO $this->eventCode (guest_name, add_guest) VALUES (:guest_name, :add_guest)");
+    $this->preparedQuery("INSERT INTO $this->eventCode (guest_name, add_guest, guest_phone) VALUES (:guest_name, :add_guest, :guest_phone)");
     $this->bind(':guest_name', $this->result['guest_name']);
     $this->bind(':add_guest', $this->result['add_guest']);
+    $this->bind(':guest_phone', $phoneNumber);
     $this->execute(); 
+    
   }
+
 }

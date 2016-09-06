@@ -6,6 +6,7 @@ ini_set('display_errors', 1);
 //Plivo API
 require_once('bootstrap.php');
 use Plivo\RestAPI;
+use Respect\Validation;
 
 $auth_id = "MAODLMYTLJODEYNZUZNG";
 $auth_token = "ZTZmZGNjOTYwZTg5NjUzMDk3Y2MwOTM0YTFhYTFm";
@@ -33,13 +34,13 @@ if ($sessionExists == TRUE) {
 }
 
 switch($step) {
-	case 1:
+	case 1: 
 		$text = strtoupper($text);
 		$eventCheck = $smsSession->checkEventCode($text);
 
 		if ($eventCheck == TRUE) {
 			$smsSession->processStepOne($fromNumber, $text);
-			$message = "What is your name?";
+			$message = "What is your name? (First Name, Last Name)";
 			$params = array(
 		        'src' => $toNumber, // Sender's phone number with country code
 		        'dst' => $fromNumber, // Receiver's phone number with country code
@@ -89,8 +90,43 @@ switch($step) {
 		    );
 			$sms = $response->send_message($params);
 		}
-		break;
+		break; 
+	case 4:
+		if ($smsSession->checkIfRegistered($fromNumber, $text) == TRUE) {
+			$message = "It looks like you've already RSVP'd for this event. Please try again with a different event code.";
+			$params = array(
+		        'src' => $toNumber, // Sender's phone number with country code
+		        'dst' => $fromNumber, // Receiver's phone number with country code
+		        'text' => $message // Your SMS text message
+		    );
+		    $sms = $response->send_message($params);
+		} else {
+			$smsSession->refreshSMSSession($fromNumber);
 
+			$text = strtoupper($text);
+			$eventCheck = $smsSession->checkEventCode($text);
+
+			if ($eventCheck == TRUE) {
+				$smsSession->processStepOne($fromNumber, $text);
+				$message = "What is your name? (First Name, Last Name)";
+				$params = array(
+			        'src' => $toNumber, // Sender's phone number with country code
+			        'dst' => $fromNumber, // Receiver's phone number with country code
+			        'text' => $message // Your SMS text message
+			    );
+				$sms = $response->send_message($params);
+			} else {
+				$message = "Event not found. Please check your code and try again.";
+				$params = array(
+			        'src' => $toNumber, // Sender's phone number with country code
+			        'dst' => $fromNumber, // Receiver's phone number with country code
+			        'text' => $message // Your SMS text message
+			    );
+				$sms = $response->send_message($params);
+			}
+
+		}
+		break;
 }
 
 

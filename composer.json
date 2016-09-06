@@ -1,8 +1,8 @@
-
 {
     "require": {
         "plivo/plivo-php": "^1.0",
-        "josegonzalez/dotenv": "dev-master"
+        "josegonzalez/dotenv": "dev-master",
+        "respect/validation": "^1.1"
     },
     "autoload": {
         "psr-4": {

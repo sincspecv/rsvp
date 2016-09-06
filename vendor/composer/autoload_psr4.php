@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'TheFancyRobot\\' => array($baseDir . '/lib/classes'),
+    'Respect\\Validation\\' => array($vendorDir . '/respect/validation/library'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'M1\\Env\\' => array($vendorDir . '/m1/env/src'),
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),

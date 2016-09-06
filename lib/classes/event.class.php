@@ -215,17 +215,18 @@ class Event extends DatabaseConnection {
         $userData = $this->getSingleRow();
         $userid=$userData['userid'];
         //Add event info to event table
-        $this->preparedQuery("INSERT INTO events (userid, event_name, event_code, event_date, primary_host, second_host) VALUES (:userid, :eventname, :eventcode, :eventdate, :primaryhost, :secondhost)");
+        $this->preparedQuery("INSERT INTO events (userid, event_name, event_code, event_date, primary_host, second_host, event_phone) VALUES (:userid, :eventname, :eventcode, :eventdate, :primaryhost, :secondhost, :eventphone)");
         $this->bind(':userid', $userid);
         $this->bind(':eventname', $eventName);
         $this->bind(':eventcode', $eventCode);
         $this->bind(':eventdate', $eventDate);
         $this->bind(':primaryhost', $pHostName);
         $this->bind(':secondhost', $sHostName);
+        $this->bind(':eventphone', '8153144282');
         $this->execute();
 
         //Create event table in db
-        $this->preparedQuery("CREATE TABLE $eventCode (id int NOT NULL PRIMARY KEY AUTO_INCREMENT, guest_name VARCHAR(255), add_guest VARCHAR(255))");
+        $this->preparedQuery("CREATE TABLE $eventCode (id int NOT NULL PRIMARY KEY AUTO_INCREMENT, guest_name VARCHAR(255), add_guest VARCHAR(255), guest_phone VARCHAR(255))");
         $this->execute();
 
         //Add primary host to event table

@@ -20,7 +20,7 @@
                                     <ul>
                                           <li><strong>Date:</strong> {{ events.event_date }}</li>
                                           <li><strong>Registration Code:</strong> {{ events.event_code }}</li>
-                                          <li><strong>SMS Phone Number:</strong> {{ events.event_phone }}</li>
+                                          <li><strong>SMS Phone Number:</strong> {{ events.event_phone | tel }}</li>
                                           <li><strong>Primary Host:</strong> {{ events.primary_host }}</li>
                                           <li><strong>Second Host:</strong> {{ events.second_host }}</li>
                                           <li><strong>Number of Guests:</strong> {{ events.guest_count }}</li>
