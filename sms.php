@@ -6,7 +6,6 @@ ini_set('display_errors', 1);
 //Plivo API
 require_once('bootstrap.php');
 use Plivo\RestAPI;
-use Respect\Validation;
 
 $auth_id = "MAODLMYTLJODEYNZUZNG";
 $auth_token = "ZTZmZGNjOTYwZTg5NjUzMDk3Y2MwOTM0YTFhYTFm";
@@ -40,7 +39,7 @@ switch($step) {
 
 		if ($eventCheck == TRUE) {
 			$smsSession->processStepOne($fromNumber, $text);
-			$message = "What is your name? (First Name, Last Name)";
+			$message = "What is your name? (First and last name, e.g. John Doe)";
 			$params = array(
 		        'src' => $toNumber, // Sender's phone number with country code
 		        'dst' => $fromNumber, // Receiver's phone number with country code
@@ -48,7 +47,7 @@ switch($step) {
 		    );
 			$sms = $response->send_message($params);
 		} else {
-			$message = "Event not found. Please check your code and try again.";
+			$message = "Event not found. Please check your event code and try again.";
 			$params = array(
 		        'src' => $toNumber, // Sender's phone number with country code
 		        'dst' => $fromNumber, // Receiver's phone number with country code
@@ -58,16 +57,27 @@ switch($step) {
 		}
 		break;
 	case 2:
-		$text = ucwords($text); //Make first letter of each word upper case
-		$smsSession->processStepTwo($fromNumber, $text);
+		if (preg_match('/[0-9]/', $text)) { //check if input contains number so as to prevent saving event code as name
+			$message = "Please enter a valid name (e.g. John Doe)";
+			$params = array(
+		        'src' => $toNumber, // Sender's phone number with country code
+		        'dst' => $fromNumber, // Receiver's phone number with country code
+		        'text' => $message // Your SMS text message
+		    );
+			$sms = $response->send_message($params);
+			break;
+		} else {
+			$text = ucwords($text); //Make first letter of each word upper case
+			$smsSession->processStepTwo($fromNumber, $text);
 
-		$message = "How many additional guests will you be bringing? (Numeric value only)";
-		$params = array(
-	        'src' => $toNumber, // Sender's phone number with country code
-	        'dst' => $fromNumber, // Receiver's phone number with country code
-	        'text' => $message // Your SMS text message
-	    );
-		$sms = $response->send_message($params);
+			$message = "How many additional guests will you be bringing? (Numeric value only)";
+			$params = array(
+		        'src' => $toNumber, // Sender's phone number with country code
+		        'dst' => $fromNumber, // Receiver's phone number with country code
+		        'text' => $message // Your SMS text message
+		    );
+			$sms = $response->send_message($params);
+		}
 		break;
 	case 3:
 		if (is_numeric($text)) {
