@@ -58,7 +58,7 @@ switch($step) {
 		}
 		break;
 	case 2:
-		$text = ucwords($text);
+		$text = ucwords($text); //Make first letter of each word upper case
 		$smsSession->processStepTwo($fromNumber, $text);
 
 		$message = "How many additional guests will you be bringing? (Numeric value only)";

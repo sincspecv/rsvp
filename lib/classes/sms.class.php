@@ -35,11 +35,14 @@ class SMS extends DatabaseConnection {
    */
   public function checkEventCode($eventCode) {
     $this->eventExists = $this->checkForTable($eventCode);
-
-    if ($this->eventExists == TRUE) {
-      return TRUE;
-    } else {
+    if (strlen($eventCode) != 8 || !preg_match('/\D{4}\d{4}/', $eventCode)) { 
       return FALSE;
+    } else {
+      if ($this->eventExists == TRUE) {
+        return TRUE;
+      } else {
+        return FALSE;
+      }
     }
   }
 
