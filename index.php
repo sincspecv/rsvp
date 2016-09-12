@@ -19,6 +19,7 @@ if (isset($_SESSION['agent']) && $_SESSION['agent'] == md5($_SERVER['HTTP_USER_A
             <h2 class="form-signin-heading">Please sign in</h2>
             <input type="text" class="form-control" name="username" id="username" placeholder="Username" required="" autofocus="">
             <input type="password" class="form-control" name="password" id="password" placeholder="Password" required="">
+            <input type="hidden" name="id" value="<?php echo md5($_SERVER['HTTP_USER_AGENT']); ?>">
             <button class="btn btn-lg btn-primary btn-block" type="submit" id="button-signin">Sign in</button>
         </form>
     </div>

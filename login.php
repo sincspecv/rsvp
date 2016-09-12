@@ -3,20 +3,26 @@ namespace TheFancyRobot\RSVP;
 
 include('header.php');
 
+if (empty($_POST) || $_POST['id'] != md5($_SERVER['HTTP_USER_AGENT'])) { //Make sure form was filled out and prevent cross site submission
+    header('location: ' . $url . 'index.php');
+    die();
+}
+
 $username = strtolower(trim($_POST['username']));
 $password = $_POST['password'];
 
 $user = new User();
-$userInfo = $user->GetUserInfo($username); //Get user info from database
 
-//Check for valid username
-if (!$userInfo) {
+$checkUser = $user->checkUser($username); //check if user exists
+
+if (!$checkUser) {
     echo '<script language="javascript">';
     echo 'alert("Wrong username or password.");';
-    echo 'location.href="login.htm";';
+    echo 'location.href="index.php";';
     echo '</script>';
 } else {
-    //User info from db as array $userInfo
+    $userInfo = $user->GetUserInfo($username); //Get user info from database
+
     $dbUsername = $userInfo['username'];
     $dbPassword = $userInfo['password'];
 
@@ -28,7 +34,7 @@ if (!$userInfo) {
     } else {
         echo '<script language="javascript">';
         echo 'alert("Wrong username or password.");';
-        echo 'location.href="login.htm";';
+        echo 'location.href="index.php";';
         echo '</script>';
     }
 }
