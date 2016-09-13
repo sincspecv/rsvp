@@ -6,6 +6,7 @@
 
           <form role="form" name="eventForm" class="form-horizontal" ng-submit="submitForm(eventForm.$valid)" method="POST" id="register" novalidate>
                <div class="col-sm-8 col-sm-offset-7">
+                    <div class="alert alert-danger" role="alert" ng-show="showError">Something went wrong. Please check your entries and try again.</div>
                     <div class="form-group">
 
                     <h3>Primary Host</h3>
@@ -44,14 +45,15 @@
                     <div ng-class="{ 'has-error' : eventForm.eventName.$touched && eventForm.eventName.$invalid }" class="form-group ">
                          <label for="eventName" class="control-label">Event Name:</label> 
                          <span class="alert" ng-show="eventForm.eventName.$touched && eventForm.eventName.$invalid">This field is required.</span>
-                         <input type="text" class="form-control" name="eventName" id="eventName" ng-model="formData.eventName" value="" required>
+                         <input type="text" class="form-control" name="eventName" id="eventName" ng-trim="false" ng-model="formData.eventName" value="" required>
                     </div>
 
                     <!-- EVENT DATE -->
                     <div ng-class="{ 'has-error' : eventForm.eventDate.$touched && eventForm.eventDate.$invalid }" class="form-group ">
                          <label for="eventDate" class="control-label">Event Date:</label> 
                          <span class="alert" ng-show="eventForm.eventDate.$touched && eventForm.eventDate.$invalid">This field is required.</span>
-                         <input type="date" class="form-control" name="eventDate" id="eventDate" ng-model="formData.eventDate" value="mm/dd/yyyy" required>
+                         <span class="aleart" ng-show="eventForm.eventDate.$error.min">Event date can not be earlier than today.</span>
+                         <input type="date" class="form-control" name="eventDate" id="eventDate" ng-model="formData.eventDate" value="mm/dd/yyyy" min="{{today}}" required>
                     </div>               
 
                     <!-- SUBMIT BUTTON -->

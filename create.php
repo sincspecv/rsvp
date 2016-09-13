@@ -11,6 +11,12 @@ Session::verifySession();
 
 $event = new Event();
 
+foreach ($_POST as $value) {
+    if ($value == '') {
+        $value = NULL;
+    }
+}
+$pHostFirstName = isset($_POST['pHostFirstName']) ? $_POST['pHostFirstName'] : '';
 $pHostFirstName = filter_var(trim($_POST['pHostFirstName']), FILTER_SANITIZE_STRING);
 $pHostLastName = filter_var(trim($_POST['pHostLastName']), FILTER_SANITIZE_STRING);
 $sHostFirstName = filter_var(trim($_POST['sHostFirstName']), FILTER_SANITIZE_STRING);
