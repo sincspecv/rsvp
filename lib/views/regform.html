@@ -1,5 +1,6 @@
       <form role="form" name="regForm" class="form-horizontal" ng-submit="submitForm(regForm.$valid)" method="POST" id="register" novalidate>
         <div class="col-sm-6 col-sm-offset-6">
+          <div class="alert alert-danger" role="alert" ng-show="showError">Something went wrong. Please check your entries and try again.</div>
           <div class="form-group">
 
             <!-- FIRST NAME -->
@@ -20,7 +21,7 @@
             <div ng-class="{ 'has-error' : regForm.email.$touched && regForm.email.$invalid }" class="form-group ">
             <label for="email" class="control-label">E-Mail:</label>
             <span class="alert" ng-show="regForm.email.$touched && regForm.email.$invalid">Invalid email address.</span>
-            <input type="email" class="form-control" name="email" id="email" ng-model="formData.email" value="">
+            <input type="email" class="form-control" name="email" id="email" ng-model="formData.email" value="" required>
             </div>
 
 
@@ -28,7 +29,7 @@
             <div ng-class="{ 'has-error' : regForm.userphone.$touched && regForm.userphone.$invalid }" class="form-group ">
             <label for="userphone" class="control-label">Phone Number:</label>
             <span class="alert" ng-show="regForm.userphone.$touched && regForm.userphone.$invalid">This field is required.</span>
-            <input type="text" class="form-control" name="userphone" id="userphone" ng-model="formData.userphone" value="" maxlength="12" required>
+            <input type="text" class="form-control" name="userphone" id="userphone" ng-model="formData.userphone" ng-value="PhoneNumber" value="" maxlength="12" required phone-validator>
             </div>
 
             <!-- USERNAME -->

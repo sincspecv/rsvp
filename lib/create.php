@@ -12,7 +12,7 @@ Session::verifySession();
 
 $event = new Event();
 
-//Make sure there are no empty values in $_POST except for second host
+//Make sure there are no empty values in $_POST except for second host (Angular omits empty inputs)
 $postData = $_POST;
 unset($postData['sHostFirstName'], $postData['sHostLastName']); // $postData contanis all key value pairs submitted by angular which can't be empty
 $control = array('pHostFirstName' => '', 'pHostLastName' => '', 'eventName' => '', 'eventDate' => ''); //$control contains all keys required for submission
