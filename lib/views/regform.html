@@ -28,7 +28,7 @@
             <div ng-class="{ 'has-error' : regForm.userphone.$touched && regForm.userphone.$invalid }" class="form-group ">
             <label for="userphone" class="control-label">Phone Number:</label>
             <span class="alert" ng-show="regForm.userphone.$touched && regForm.userphone.$invalid">This field is required.</span>
-            <input type="text" class="form-control" name="userphone" id="userphone" ng-model="formData.userphone" value="" maxlength="10" required>
+            <input type="text" class="form-control" name="userphone" id="userphone" ng-model="formData.userphone" value="" maxlength="12" required>
             </div>
 
             <!-- USERNAME -->
@@ -49,7 +49,8 @@
             <div ng-class="{ 'has-error' : regForm.confirm.$touched && regForm.confirm.$invalid }" ng-class="dynamicClass" class="form-group ">
             <label for="confirm" class="control-label">Confirm Password:</label>
             <span class="alert" ng-show="regForm.confirm.$touched && regForm.confirm.$invalid">This field is required.</span>
-            <input type="password" class="form-control" name="confirm" id="confirm" ng-model="formData.confirm" value="" maxlength="20" required><br />
+              <span ng-show='regForm.confirm_password.$error.match'>Passwords do not match!</span>
+            <input type="password" class="form-control" name="confirm" id="confirm" ng-model="formData.confirm" value="" maxlength="20" match="formData.password" required><br />
             </div>
 
              <!-- SUBMIT BUTTON -->
