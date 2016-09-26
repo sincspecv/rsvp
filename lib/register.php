@@ -6,7 +6,7 @@ include('../header.php');
 
 $user = new User();
 
-//Make sure there are no empty values in $_POST (Angular omits empty inputs, so any omitted index will not be present in $_POST)
+//Make sure there are no empty values in $_POST (Angular omits empty fields, so any omitted index will not be present in $_POST)
 $control = array('username' => '', 'password' => '', 'firstname' => '', 'lastname' => '', 'email' => '', 'userphone' => ''); //$control contains all keys required for submission
 
 //compare the arrays to ensure all data was submitted.
