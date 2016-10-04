@@ -8,8 +8,8 @@ if (isset($_SESSION['agent']) && $_SESSION['agent'] == md5($_SERVER['HTTP_USER_A
 }
 ?>
 
- <div class="row text-center" id="title" class="title">
-    <img src="lib/img/rsvpd_logo.png">
+ <div class="row text-center logo" id="logo">
+    rsvpd
 </div> 
 
   <div class="row form-background" id="sign-in-row">

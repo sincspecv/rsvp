@@ -7,4 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'josegonzalez\\Dotenv' => array($vendorDir . '/josegonzalez/dotenv/src', $vendorDir . '/josegonzalez/dotenv/tests'),
+    'cli' => array($vendorDir . '/wp-cli/php-cli-tools/lib'),
+    'JeremyKendall\\Password\\' => array($vendorDir . '/jeremykendall/password-validator/src'),
 );

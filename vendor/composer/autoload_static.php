@@ -10,6 +10,8 @@ class ComposerStaticInit9bd9570c0cb8928b0136914babafa78b
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        'be01b9b16925dcb22165c40b46681ac6' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/cli.php',
+        'e40631d46120a9c38ea139981f8dab26' => __DIR__ . '/..' . '/ircmaxell/password-compat/lib/password.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -75,6 +77,20 @@ class ComposerStaticInit9bd9570c0cb8928b0136914babafa78b
             array (
                 0 => __DIR__ . '/..' . '/josegonzalez/dotenv/src',
                 1 => __DIR__ . '/..' . '/josegonzalez/dotenv/tests',
+            ),
+        ),
+        'c' => 
+        array (
+            'cli' => 
+            array (
+                0 => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib',
+            ),
+        ),
+        'J' => 
+        array (
+            'JeremyKendall\\Password\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/jeremykendall/password-validator/src',
             ),
         ),
     );
@@ -144,6 +160,15 @@ class ComposerStaticInit9bd9570c0cb8928b0136914babafa78b
         'GuzzleHttp\\RetryMiddleware' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/RetryMiddleware.php',
         'GuzzleHttp\\TransferStats' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/TransferStats.php',
         'GuzzleHttp\\UriTemplate' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/UriTemplate.php',
+        'JeremyKendall\\Password\\Decorator\\AbstractDecorator' => __DIR__ . '/..' . '/jeremykendall/password-validator/src/JeremyKendall/Password/Decorator/AbstractDecorator.php',
+        'JeremyKendall\\Password\\Decorator\\StorageDecorator' => __DIR__ . '/..' . '/jeremykendall/password-validator/src/JeremyKendall/Password/Decorator/StorageDecorator.php',
+        'JeremyKendall\\Password\\Decorator\\UpgradeDecorator' => __DIR__ . '/..' . '/jeremykendall/password-validator/src/JeremyKendall/Password/Decorator/UpgradeDecorator.php',
+        'JeremyKendall\\Password\\PasswordHashFailureException' => __DIR__ . '/..' . '/jeremykendall/password-validator/src/JeremyKendall/Password/PasswordHashFailureException.php',
+        'JeremyKendall\\Password\\PasswordValidator' => __DIR__ . '/..' . '/jeremykendall/password-validator/src/JeremyKendall/Password/PasswordValidator.php',
+        'JeremyKendall\\Password\\PasswordValidatorInterface' => __DIR__ . '/..' . '/jeremykendall/password-validator/src/JeremyKendall/Password/PasswordValidatorInterface.php',
+        'JeremyKendall\\Password\\Result' => __DIR__ . '/..' . '/jeremykendall/password-validator/src/JeremyKendall/Password/Result.php',
+        'JeremyKendall\\Password\\Storage\\IdentityMissingException' => __DIR__ . '/..' . '/jeremykendall/password-validator/src/JeremyKendall/Password/Storage/IdentityMissingException.php',
+        'JeremyKendall\\Password\\Storage\\StorageInterface' => __DIR__ . '/..' . '/jeremykendall/password-validator/src/JeremyKendall/Password/Storage/StorageInterface.php',
         'M1\\Env\\Exception\\ParseException' => __DIR__ . '/..' . '/m1/env/src/Exception/ParseException.php',
         'M1\\Env\\Helper\\StringHelper' => __DIR__ . '/..' . '/m1/env/src/Helper/StringHelper.php',
         'M1\\Env\\Parser' => __DIR__ . '/..' . '/m1/env/src/Parser.php',
@@ -977,6 +1002,28 @@ class ComposerStaticInit9bd9570c0cb8928b0136914babafa78b
         'TheFancyRobot\\RSVP\\SMS' => __DIR__ . '/../..' . '/lib/classes/sms.class.php',
         'TheFancyRobot\\RSVP\\Session' => __DIR__ . '/../..' . '/lib/classes/session.class.php',
         'TheFancyRobot\\RSVP\\User' => __DIR__ . '/../..' . '/lib/classes/user.class.php',
+        'cli\\Arguments' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/Arguments.php',
+        'cli\\Colors' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/Colors.php',
+        'cli\\Memoize' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/Memoize.php',
+        'cli\\Notify' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/Notify.php',
+        'cli\\Progress' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/Progress.php',
+        'cli\\Shell' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/Shell.php',
+        'cli\\Streams' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/Streams.php',
+        'cli\\Table' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/Table.php',
+        'cli\\Tree' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/Tree.php',
+        'cli\\arguments\\Argument' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/arguments/Argument.php',
+        'cli\\arguments\\HelpScreen' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/arguments/HelpScreen.php',
+        'cli\\arguments\\InvalidArguments' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/arguments/InvalidArguments.php',
+        'cli\\arguments\\Lexer' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/arguments/Lexer.php',
+        'cli\\notify\\Dots' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/notify/Dots.php',
+        'cli\\notify\\Spinner' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/notify/Spinner.php',
+        'cli\\progress\\Bar' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/progress/Bar.php',
+        'cli\\table\\Ascii' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/table/Ascii.php',
+        'cli\\table\\Renderer' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/table/Renderer.php',
+        'cli\\table\\Tabular' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/table/Tabular.php',
+        'cli\\tree\\Ascii' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/tree/Ascii.php',
+        'cli\\tree\\Markdown' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/tree/Markdown.php',
+        'cli\\tree\\Renderer' => __DIR__ . '/..' . '/wp-cli/php-cli-tools/lib/cli/tree/Renderer.php',
         'josegonzalez\\Dotenv\\Expect' => __DIR__ . '/..' . '/josegonzalez/dotenv/src/josegonzalez/Dotenv/Expect.php',
         'josegonzalez\\Dotenv\\ExpectTest' => __DIR__ . '/..' . '/josegonzalez/dotenv/tests/josegonzalez/Dotenv/ExpectTest.php',
         'josegonzalez\\Dotenv\\Filter\\CallableFilter' => __DIR__ . '/..' . '/josegonzalez/dotenv/src/josegonzalez/Dotenv/Filter/CallableFilter.php',

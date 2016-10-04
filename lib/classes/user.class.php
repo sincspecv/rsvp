@@ -23,7 +23,6 @@ class User extends DatabaseConnection {
    */
   public function checkPassword ($password, $dbPassword) {
 
-    //Combine password with salt in db
     $this->pwOptions = ['cost' => 10];
     $this->hashedPW = password_hash($password, PASSWORD_BCRYPT, $this->pwOptions);
 

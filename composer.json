@@ -2,7 +2,8 @@
     "require": {
         "plivo/plivo-php": "^1.0",
         "josegonzalez/dotenv": "dev-master",
-        "respect/validation": "^1.1"
+        "respect/validation": "^1.1",
+        "jeremykendall/password-validator": "^3.0"
     },
     "autoload": {
         "psr-4": {

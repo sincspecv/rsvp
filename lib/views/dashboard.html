@@ -1,25 +1,82 @@
-      <div class="well col-sm-10 col-sm-offset-4 text-center reg-success">
-            <strong>Welcome Back {{ user.first_name }}!</strong><br />
-            <p>This is your dashboard. You can create and manage your events here.</p>
-      </div>
-      <div class="col-sm-12 col-sm-offset-3" ng-controller="eventController">
+
+      <div class="event col-sm-12" ng-controller="eventController">
       	<div ng-if="events == ''">
       	<p><h3>You have not created any events. <a href ng-click="changeView('create')">Click here to create an event.</a></h3></p>
       	</div>
       	<div ng-if="events != ''">
-	      	<div id="event-header" class="text-center">
-	      		<h2>Events</h2>
-	      	</div>
-	      	<div id="eventCodes" ng-repeat="events in eventInfo.events" ng-controller="modalController">
-                        
+
+	      	<div id="eventCodes"  ng-controller="guestListCtrl">
+                <div class="tabs-wrap">
+                    <uib-tabset class="event-tabset" active="active" type="pills">
+                        <uib-tab class="event-tabs" index="$index + 1" ng-repeat="events in eventInfo.events" heading="{{ events.event_name }}">
+                            <div class="event-info">
+                                <div class="event-table">
+                                    <ul>
+                                        <li><strong>Date:</strong> {{ events.event_date }}</li>
+                                        <li><strong title="Registration Code">Registration Code:</strong> {{ events.event_code }}</li>
+                                        <li><strong>SMS Phone Number:</strong> {{ events.event_phone | tel }}</li>
+                                        <li><strong>Primary Host:</strong> {{ events.primary_host }}</li>
+                                        <li><strong>Second Host:</strong> {{ events.second_host }}</li>
+                                        <li><strong>Number of Guests:</strong> {{ events.guest_count }}</li>
+                                    </ul>
+                                </div>
+                                <uib-accordion close-others="oneAtATime">
+                                    <div uib-accordion-group class="panel-default" heading="Guest List" is-open="false" is-disabled="status.isFirstDisabled">
+                                        <uib-accordion close-others="oneAtATime">
+                                            <div uib-accordion-group class="panel-default" heading="Add Guest" is-open="false" is-disabled="status.isFirstDisabled">
+                                                <div class="guest-form" id="add-guest">
+                                                    <form role="form" name="guestForm" class="form-horizontal" ng-submit="submitForm(guestForm.$valid)" id="addGuest" novalidate>
+                                                        <label>{{ events.event_code }}</label>
+                                                        <!-- GUEST NAME -->
+                                                        <div ng-class="{ 'has-error' : guestForm.guestName.$touched && guestForm.guestName.$invalid }" class="form-group col-sm-6">
+                                                            <span class="alert" ng-show="guestForm.guestName.$touched && guestForm.guestName.$invalid">This field is required.</span>
+                                                            <input type="text" class="form-control" name="guestName" id="guestName" value="" placeholder="First and Last Name" ng-model="formData.guestName" required>
+                                                        </div>
+
+                                                        <!-- ADDITIONAL GUESTS -->
+                                                        <div ng-class="{ 'has-error' : guestForm.addGuest.$touched && guestForm.addGuest.$invalid }" class="form-group col-sm-3">
+                                                            <span class="alert" ng-show="guestForm.addGuest.$touched && guestForm.addGuest.$invalid">This field is required.</span>
+                                                            <input type="text" class="form-control" name="addGuest" id="addGuest" value="" placeholder="Additional Guests" ng-model="formData.addGuest" required>
+                                                        </div>
+
+                                                        <input type="hidden" name="eventCode" value="{{ events.event_code }}" ng-model="formData.eventCode">
+
+                                                        <!-- SUBMIT BUTTON -->
+                                                        <button type="submit" class="btn btn-info btn-sm" ng-disabled="guestForm.$invalid">Submit</button>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </uib-accordion>
+                                        <div id="guestlist" class="guestlist table-responsive">
+                                            <table id="gltable" class="table table-striped">
+                                                <tr>
+                                                    <th>Guest Name</th>
+                                                    <th>Additional Guests</th>
+                                                </tr>
+                                                <tr ng-repeat="guests in events.guest_list">
+                                                    <td>{{ guests.guest_name }}</td>
+                                                    <td>{{ guests.add_guest }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </uib-accordion>
+                            </div>
+                        </uib-tab>
+                    </uib-tabset>
+                </div>
+            </div>
+
+                      <!---
                         <div ng-click="open('lg')" class="alert alert-info col-sm-16">
                               <div class="text-center">
                                     <h3>{{ events.event_name }}</h3>
                               </div>
-                              <div>
+                              <div class="event-table">
                                     <ul>
                                           <li><strong>Date:</strong> {{ events.event_date }}</li>
-                                          <li><strong>Registration Code:</strong> {{ events.event_code }}</li>
+                                          <li><strong title="Registration Code">Registration Code:</strong> {{ events.event_code }}</li>
                                           <li><strong>SMS Phone Number:</strong> {{ events.event_phone | tel }}</li>
                                           <li><strong>Primary Host:</strong> {{ events.primary_host }}</li>
                                           <li><strong>Second Host:</strong> {{ events.second_host }}</li>
@@ -33,13 +90,8 @@
                                     
                               </div>
                         </div>
+                     --->
 	      	</div>
-                  <div id="add-event" class="btn btn-lg">
-                        <a href ng-click="changeView('create')">&#91; + &#93; Create new Event</a>
-                  </div>
-                  <div id="logout" class="btn btn-lg">
-                        <a href="logout.php">Logout</a>
-                  </div>
       	</div>
 
       </div>

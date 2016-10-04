@@ -1,5 +1,6 @@
 <?php
 namespace TheFancyRobot\RSVP;
+use JeremyKendall\Password\PasswordValidator;
 
 include('header.php');
 
@@ -26,11 +27,12 @@ if (!$checkUser) {
     $dbUsername = $userInfo['username'];
     $dbPassword = $userInfo['password'];
 
-    $checkPassword = $user->checkPassword($password, $dbPassword);
+    $validator = new PasswordValidator();
+    $result = $validator->isValid($password, $dbPassword);
 
-    if ($checkPassword = TRUE) { //If password is a match, create session
+    if ($result->isValid()) {
         Session::createSession($userInfo);
-        header("Location: " . $url . "account.php");
+        header("Location: " . $url . "dashboard.php");
     } else {
         echo '<script language="javascript">';
         echo 'alert("Wrong username or password.");';

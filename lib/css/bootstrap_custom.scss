@@ -1,7 +1,12 @@
+
+@import 'bootstrap';
+@import 'bootswatch';
+
 body {
-  margin: 50px 0 0 0;
+  margin: 65px 0 0 0;
   padding: 0;
   background-color: #FFFFFF;
+  overflow: hidden;
 }
 
 li {
@@ -11,11 +16,16 @@ li {
 .event {
   margin: 0;
   padding: 0;
+  height: calc(100vh - 75px);
 }
+
 .container {
   margin: 0;
   padding: 5px;
   width: 100%;
+  max-width: 100%;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 .event-table ul {
@@ -25,8 +35,9 @@ li {
 }
 
 .guestlist {
-  overflow-x: auto;
+  height: inherit;
   border: #000 solid 1px;
+  text-align: left;
 }
 
 .logo {
@@ -37,6 +48,10 @@ li {
 .nav a{
   color: white;
   text-decoration: none;
+}
+
+.navbar {
+  padding-right: 10px;
 }
 
 .navbar-brand {
@@ -114,6 +129,7 @@ li {
   background-color: #F9F9F9;
   padding-top: 25px;
   align-items: center;
+  overflow: none;
 }
 
 .event-info {
@@ -158,4 +174,6 @@ li {
   color: #303136;
 }
 
-
+.panel-default {
+  text-align: center;
+}

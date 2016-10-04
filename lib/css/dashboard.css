@@ -1,0 +1,92 @@
+body {
+    padding: 0;
+    background-color: #65A5DA;
+}
+
+li {
+    list-style: none;
+}
+
+ul {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
+.nav a{
+    color: white;
+    text-decoration: none;
+}
+
+.nav ul{
+    float: right;
+}
+
+.navbar {
+    border-radius: 0;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.form-background {
+    background-color: rgba(179,125,82, 0.7);
+    padding: 0 0 20px 0;
+    border-radius: 10px;
+}
+
+#conversion-span {
+    font-size: 1.2em;
+}
+
+.reg-success {
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+#logout {
+    display: inline-block;
+    float: right;
+}
+
+#event-header {
+    color: #F0FCFC;
+}
