@@ -25,8 +25,8 @@
                                         <uib-accordion close-others="oneAtATime">
                                             <div uib-accordion-group class="panel-default" heading="Add Guest" is-open="false" is-disabled="status.isFirstDisabled">
                                                 <div class="guest-form" id="add-guest">
-                                                    <form role="form" name="guestForm" class="form-horizontal" ng-submit="submitForm(guestForm.$valid)" id="addGuest" novalidate>
-                                                        <label>{{ events.event_code }}</label>
+                                                    <form role="form" name="guestForm" class="form-horizontal" ng-submit="submitForm(guestForm.$valid, events.event_code)" id="addGuest" novalidate>
+
                                                         <!-- GUEST NAME -->
                                                         <div ng-class="{ 'has-error' : guestForm.guestName.$touched && guestForm.guestName.$invalid }" class="form-group col-sm-6">
                                                             <span class="alert" ng-show="guestForm.guestName.$touched && guestForm.guestName.$invalid">This field is required.</span>
@@ -39,10 +39,8 @@
                                                             <input type="text" class="form-control" name="addGuest" id="addGuest" value="" placeholder="Additional Guests" ng-model="formData.addGuest" required>
                                                         </div>
 
-                                                        <input type="hidden" name="eventCode" value="{{ events.event_code }}" ng-model="formData.eventCode">
-
                                                         <!-- SUBMIT BUTTON -->
-                                                        <button type="submit" class="btn btn-info btn-sm" ng-disabled="guestForm.$invalid">Submit</button>
+                                                        <button type="submit" class="btn btn-info btn-md" ng-disabled="guestForm.$invalid">Submit</button>
 
                                                     </form>
                                                 </div>
@@ -65,6 +63,16 @@
                             </div>
                         </uib-tab>
                     </uib-tabset>
+                    <div class="info" id="info-div">
+                        <h4>Welcome Back {{ user.first_name }}!</h4>
+                        <p>This is where you manage your events and guestlists. </p>
+                        <p><strong>What does it all mean?</strong></p>
+                        <p>The <strong>Registration Code</strong> is the code that your guests need to text in to RSVP for your event.<br />
+                        The <strong>SMS Phone Number</strong> is the phone number your guests text the registration code to.<br>
+                        The <strong>Number of Guests</strong> field shows the number of guests that have RSVP'd with a Y.</p>
+                        <p>Click on <strong>Guest List</strong> to see a table of guests who have RSVP'd, the number of additional guests, and wether or not they are attending.<br>
+                        While viewing your Guest List you can manually add a guest by clicking on <strong>Add Guest</strong></p>
+                    </div>
                 </div>
             </div>
 

@@ -20,6 +20,7 @@ require_once __DIR__ . '/lib/config.php';
 <head>
   <title> RSVP </title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <!-- Bootstrap core CSS -->
     <link href="lib/css/bootstrap_custom.css" rel="stylesheet">
 
