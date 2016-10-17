@@ -12,7 +12,7 @@ $control = array('username' => '', 'password' => '', 'firstname' => '', 'lastnam
 //compare the arrays to ensure all data was submitted.
 $intersect = array_intersect_key($_POST, $control);
 if (count($intersect) != count($control)) { //if $_POST and $control do not have an equal number of indexes, that means data was omitted on the form
-    header('HTTP/1.1 400 Bad Request (empty field)', true, 400);
+    header('Field Left Empty', true, 400);
     die();
 }
 
@@ -28,7 +28,7 @@ $userPhone = trim($_POST['userphone']);
 $userPhone = preg_replace('/[^0-9]/', '', $userPhone);
 
 if (strlen($userPhone) != 10) {
-    header('HTTP/1.1 400 Bad Request (Check phone number)', true, 400);
+    header('Invalid Phone Number', true, 400);
     die();
 }
 
@@ -37,8 +37,7 @@ $user->createUser($username, $password, $firstname, $lastname, $email, $userPhon
 
 
 //Session Variables
-$sessionArray = array('username' => $username, 'firstname' => $firstname, 'lastname' => $lastname);
+$sessionArray = array('username' => $username, 'firstname' => $firstname, 'lastname' => $lastname, 'event_codes' => '');
 Session::createSession($sessionArray);
-
 include('../footer.php');
 ?>

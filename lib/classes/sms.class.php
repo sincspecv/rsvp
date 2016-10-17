@@ -114,6 +114,15 @@ class SMS extends DatabaseConnection {
     $this->execute();
   }
 
+  public function processStepFour($phoneNumber, $text) {
+      $this->step = 5;
+      $this->preparedQuery("UPDATE sms SET attending = :attending, step = :step WHERE phone_number = :phone_number");
+      $this->bind(':attending', $text);
+      $this->bind(':step', $this->step);
+      $this->bind(':phone_number', $phoneNumber);
+      $this->execute();
+  }
+
 /**
  * Check if guest has already registered for this event
  * @param  string $phoneNumber Phone Number
@@ -162,18 +171,19 @@ class SMS extends DatabaseConnection {
    * Add guest to guest list
    * @param string $phoneNumber Phone number
    */
-  public function addToGuestList($phoneNumber) {
+  public function smsAddToGuestList($phoneNumber) {
     $this->preparedQuery("SELECT * FROM sms WHERE phone_number = :phone_number");
     $this->bind(':phone_number', $phoneNumber);
     $this->execute();
     $this->result = $this->getSingleRow();
 
     $this->eventCode = $this->result['event_code'];
-    
-    $this->preparedQuery("INSERT INTO $this->eventCode (guest_name, add_guest, guest_phone) VALUES (:guest_name, :add_guest, :guest_phone)");
+
+    $this->preparedQuery("INSERT INTO $this->eventCode (guest_name, add_guest, guest_phone, attending) VALUES (:guest_name, :add_guest, :guest_phone, :attending)");
     $this->bind(':guest_name', $this->result['guest_name']);
     $this->bind(':add_guest', $this->result['add_guest']);
-    $this->bind(':guest_phone', $phoneNumber);
+    $this->bind(':guest_phone', $this->result['phone_number']);
+    $this->bind(':attending', $this->result['attending']);
     $this->execute(); 
     
   }

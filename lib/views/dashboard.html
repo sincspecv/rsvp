@@ -1,14 +1,15 @@
 
-      <div class="event col-sm-12" ng-controller="eventController">
-      	<div ng-if="events == ''">
-      	<p><h3>You have not created any events. <a href ng-click="changeView('create')">Click here to create an event.</a></h3></p>
+      <div class="event col-xs-12 col-md-12" ng-controller="eventController">
+      	<div class=" form-background text-center" ng-if="events == ''">
+            <h3><p>Thank you for registering {{ user.first_name }}!</p></h3><br>
+      	    <p>The first step is to create your event so that you can manage your guest list. <a href ng-click="changeView('create')">Click here to create an event.</a></p>
       	</div>
       	<div ng-if="events != ''">
 
-	      	<div id="eventCodes"  ng-controller="guestListCtrl">
+	      	<div id="eventCodes" ng-controller="guestListCtrl">
                 <div class="tabs-wrap">
-                    <uib-tabset class="event-tabset" active="active" type="pills">
-                        <uib-tab class="event-tabs" index="$index + 1" ng-repeat="events in eventInfo.events" heading="{{ events.event_name }}">
+                    <uib-tabset class="event-tabset" type="pills">
+                        <uib-tab class="event-tabs"  ng-repeat="events in eventInfo.events" heading="{{ events.event_name }}" active="{{ events.event_code }}">
                             <div class="event-info">
                                 <div class="event-table">
                                     <ul>
@@ -25,7 +26,7 @@
                                         <uib-accordion close-others="oneAtATime">
                                             <div uib-accordion-group class="panel-default" heading="Add Guest" is-open="false" is-disabled="status.isFirstDisabled">
                                                 <div class="guest-form" id="add-guest">
-                                                    <form role="form" name="guestForm" class="form-horizontal" ng-submit="submitForm(guestForm.$valid, events.event_code)" id="addGuest" novalidate>
+                                                    <form role="form" name="guestForm" class="form-horizontal" ng-submit="addGuest(guestForm.$valid, events.event_code, 'add')" id="addGuest" novalidate>
 
                                                         <!-- GUEST NAME -->
                                                         <div ng-class="{ 'has-error' : guestForm.guestName.$touched && guestForm.guestName.$invalid }" class="form-group col-sm-6">
@@ -46,15 +47,27 @@
                                                 </div>
                                             </div>
                                         </uib-accordion>
-                                        <div id="guestlist" class="guestlist table-responsive">
+                                        <div st-table="displayedList" st-safe-src="events.guest_list" id="guestlist" class="guestlist table-responsive">
                                             <table id="gltable" class="table table-striped">
                                                 <tr>
-                                                    <th>Guest Name</th>
-                                                    <th>Additional Guests</th>
+                                                    <th st-sort="guest_name">Guest Name</th>
+                                                    <th st-sort="add_guest">Additional Guests</th>
+                                                    <th st-sort="attending">Attending</th>
+                                                    <th>Delete</th>
                                                 </tr>
-                                                <tr ng-repeat="guests in events.guest_list">
+                                                <tr>
+                                                    <th colspan="5"><input st-search="" class="form-control" placeholder="Search Guest List..." type="text"/></th>
+                                                </tr>
+                                                <tr ng-repeat="guests in displayedList">
                                                     <td>{{ guests.guest_name }}</td>
                                                     <td>{{ guests.add_guest }}</td>
+                                                    <td>{{ guests.attending }}</td>
+                                                    <td>
+                                                        <button type="button" ng-click="removeGuest(events.event_code, 'remove', guests.id)" class="btn btn-sm btn-danger">
+                                                            <i class="glyphicon glyphicon-remove-circle">
+                                                            </i>
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                             </table>
                                         </div>

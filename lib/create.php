@@ -45,6 +45,11 @@ $sHostName = $sHostFirstName . " " . $sHostLastName;
 
 $username = $_SESSION['username'];
 
+$pHostName = htmlspecialchars_decode($pHostName, ENT_QUOTES);
+$sHostName = htmlspecialchars_decode($sHostName, ENT_QUOTES);
+$eventName = htmlspecialchars_decode($eventName, ENT_QUOTES);
+
+
 //Make sure event code is unique
 do {
     $eventCode = $event->createEventCode($pHostLastName, $sHostLastName);

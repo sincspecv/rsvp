@@ -31,15 +31,40 @@ class Event extends DatabaseConnection {
     $this->addGuests = $addGuests;
 
     if (strlen($this->eventCode) > 8 || !preg_match('/\D{4}\d{4}/', $this->eventCode)) { //If eventCode is more than eight characters or not 4 letters followed by 4 numbers
-      die("Not valid event code");
+        return FALSE;
+        die("Not valid event code");
     } else {
-      //Insert into DB
-      $this->preparedQuery("INSERT into $this->eventCode (guest_name, add_guest) VALUES ( :guestname, :addguests)");
-      $this->bind(':guestname', $this->guestName);
-      $this->bind(':addguests', $this->addGuests);
-      $this->execute();
+        //Insert into DB
+        $this->preparedQuery("INSERT into $this->eventCode (guest_name, add_guest) VALUES ( :guestname, :addguests)");
+        $this->bind(':guestname', $this->guestName);
+        $this->bind(':addguests', $this->addGuests);
+        $this->execute();
+        return TRUE;
     }
   }
+
+    /**
+     * @param $eventCode    Event Code
+     * @param $rowId        Row Id of entry
+     * @return bool
+     */
+  public function removeFromGuestList($eventCode, $rowId) {
+      $this->eventCode = $eventCode;
+      $this->rowId = $rowId;
+
+      if (strlen($this->eventCode) > 8 || !preg_match('/\D{4}\d{4}/', $this->eventCode)) { //If eventCode is more than eight characters or not 4 letters followed by 4 numbers
+          return FALSE;
+          die("Not valid event code");
+      } else {
+          //Remove from DB
+        $this->preparedQuery("DELETE FROM $this->eventCode WHERE id=:rowId");
+        $this->bind(':rowId', $this->rowId);
+        $this->execute();
+
+          return TRUE;
+      }
+  }
+
 
   /**
    * Get the guest list from the database
@@ -97,54 +122,7 @@ class Event extends DatabaseConnection {
     }
   }
 
-  /**
-   * Prints guest list in a HTML table
-   */
-  public function printGuestList() {
-      //Start table
-      echo '<div id="guestlist" class="guestlist">
-              <table id="gltable" class="guestlist">
-                <tr>
-                  <th>Guest Name</th>
-                  <th>Additional Guests</th>
-                </tr>
-            ';
 
-      //Print Guest List
-      foreach ($this->guestList as $index) {
-        echo "<tr>
-                <td>" . $index['guest_name'] . "</td>
-                <td>" . $index['add_guest'] . "</td>
-              </tr>
-              ";
-      }
-
-      //Close table
-      echo '  </table>
-            </div>
-            ';
-  }
-
-  /**
-   * Print event creation form
-   * @param  string $firstName First Name
-   * @param  string $lastName  Last Name
-   */
-  public function printEventForm($firstName, $lastName){
-    echo '<form action="create.php" method="POST" id="add">
-          <h2>Hosts</h2><br />
-          <h4>Primary Host (required)</h4><br />
-          First Name: <input type="text" name="pHostFirstName" id="pHostFirstName" value="' . $firstName . '">
-          Last Name: <input type="text" name="pHostLastName" id="pHostLastName" value="' . $lastName . '"><br />
-          <h4>Additional Host (optional)</h4>
-          First Name: <input type="text" name="sHostFirstName" id="sHostFirstName" value="">
-          Last Name: <input type="text" name="sHostLastName" id="sHostLastName" value=""><br />
-          <h2>Event Info</h2><br />
-          Event Name: <input type="text" name ="eventName" id="eventName">
-          Date: <input type="date" name="eventDate" id="eventDate" value="mm/dd/yyyy"><br />
-          <input type="submit" name="submit" value="Submit">
-          ';
-  }
 
   /**
    * Create event code using last name of hosts and random numbers
@@ -206,7 +184,7 @@ class Event extends DatabaseConnection {
     //Make sure eventCode doesn't exist   
 
     if ($this->checkForTable($eventCode) == TRUE) {
-      die('Something went wrong. Please <a href="account.php">try again</a>.');
+      die('Something went wrong. Please <a href="dashboard.php">try again</a>.');
     } else {
       try {
         //Get user id from user table
@@ -226,7 +204,7 @@ class Event extends DatabaseConnection {
         $this->execute();
 
         //Create event table in db
-        $this->preparedQuery("CREATE TABLE $eventCode (id int NOT NULL PRIMARY KEY AUTO_INCREMENT, guest_name VARCHAR(255), add_guest VARCHAR(255), guest_phone VARCHAR(255))");
+        $this->preparedQuery("CREATE TABLE $eventCode (id int NOT NULL PRIMARY KEY AUTO_INCREMENT, guest_name VARCHAR(255), add_guest VARCHAR(255), guest_phone VARCHAR(255), attending VARCHAR(5))");
         $this->execute();
 
         //Add primary host to event table

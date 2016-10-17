@@ -24,15 +24,17 @@ require_once __DIR__ . '/lib/config.php';
    <!-- Bootstrap core CSS -->
     <link href="lib/css/bootstrap_custom.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Monsieur+La+Doulaise" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Arimo|Monsieur+La+Doulaise" rel="stylesheet">
 
     <!--- AngularJS
     ================================================== -->
+    <script   src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
     <script src="https://code.angularjs.org/1.5.6/angular-animate.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-smart-table/dist/smart-table.min.js"></script>
     <script src="lib/js/ui-bootstrap-tpls-2.1.4.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -71,4 +73,5 @@ require_once __DIR__ . '/lib/config.php';
   <?php
   }
   ?>
-      <div class="container" id="container" ng-app="account">
+
+  <div class="container-fluid" id="container">

@@ -1,0 +1,70 @@
+<div class="modal-header">
+    <h3>Register</h3>
+</div>
+<div class="modal-body">
+    <div class="two-columns">
+        <form role="form" name="regForm" class="form-horizontal" ng-submit="" method="POST" id="register" novalidate>
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="alert alert-danger" role="alert alert-danger" ng-show="showError">Something went wrong. Please check your entries and try again.</div>
+                <div class="form-group">
+
+                    <!-- FIRST NAME -->
+                    <div ng-class="{ 'has-error' : regForm.firstname.$touched && regForm.firstname.$invalid }" class="form-group ">
+                        <span class="alert-danger" ng-show="regForm.firstname.$touched && regForm.firstname.$invalid">This field is required.</span>
+                        <input type="text" class="form-control" name="firstname" id="firstname" ng-model="formData.firstname" placeholder="First Name" value="" required>
+                    </div>
+
+                    <!-- LAST NAME -->
+                    <div ng-class="{ 'has-error' : regForm.lastname.$touched && regForm.lastname.$invalid }" class="form-group ">
+                        <span class="alert-danger" ng-show="regForm.lastname.$touched && regForm.lastname.$invalid">This field is required.</span>
+                        <input type="text" class="form-control" name="lastname" id="lastname" ng-model="formData.lastname" placeholder="Last Name" value="" required>
+                    </div>
+
+                    <!-- EMAIL -->
+                    <div ng-class="{ 'has-error' : regForm.email.$touched && regForm.email.$invalid }" class="form-group ">
+                        <span class="alert-danger" ng-show="regForm.email.$touched && regForm.email.$invalid">Invalid email address.</span>
+                        <input type="email" class="form-control" name="email" id="email" ng-model="formData.email" placeholder="Email" value="" required>
+                    </div>
+
+
+                    <!-- PHONE NUMBER -->
+                    <div ng-class="{ 'has-error' : regForm.userphone.$touched && regForm.userphone.$invalid }" class="form-group ">
+                        <span class="alert-danger" ng-show="regForm.userphone.$touched && regForm.userphone.$error.required">This field is required.</span>
+                        <span class="alert-danger" ng-show="regForm.userphone.$touched && regForm.userphone.$error.minlength">Please include area code</span>
+                        <input type="text" class="form-control" name="userphone" id="userphone" autocomplete="off" ng-model="formData.userphone" placeholder="Phone Number" ng-value="PhoneNumber" value="" minlength="12" maxlength="12" required phone-validator>
+                    </div>
+
+                    <!-- USERNAME -->
+                    <div ng-class="{ 'has-error' : regForm.username.$touched && regForm.username.$invalid }" class="form-group ">
+                        <span class="alert-danger" ng-show="regForm.username.$error.taken">Username already taken! </span>
+                        <span class="alert-danger" ng-show="regForm.username.$touched && regForm.username.$error.minlength">Must be at least 4 charachters! </span>
+                        <span class="alert-danger" ng-show="regForm.username.$touched && regForm.username.$error.required">This field is required.</span>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" ng-blur="checkUser(formData.username)"  ng-model="formData.username" value="" minlength="4" required>
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div ng-class="{ 'has-error' : regForm.password.$touched && regForm.password.$invalid }" class="form-group ">
+                        <span class="alert-danger" ng-show="regForm.password.$touched && regForm.password.$invalid">This field is invalid.</span>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" ng-model="formData.password" value="" ng-minlength="6" ng-maxlenth="20" required>
+                    </div>
+
+                    <!-- PASSWORD CONFIRMATION -->
+                    <div ng-class="{ 'has-error' : regForm.confirm.$touched && regForm.confirm.$invalid }" ng-class="dynamicClass" class="form-group ">
+                        <span class="alert-danger" ng-show="regForm.confirm.$touched && regForm.confirm.$error.required">This field is required.</span>
+                        <span class="alert-danger" ng-show="regForm.confirm.$touched && regForm.confirm.$error.match">Passwords do not match!</span>
+                        <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirm Password" ng-model="formData.confirm" value="" maxlength="20" match="formData.password" required><br />
+                    </div>
+
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" data-ng-click="cancel()">Cancel</button>
+    <!-- SUBMIT BUTTON -->
+    <button type="submit" class="btn btn-default" data-ng-click="submitForm(regForm.$valid)" ng-disabled="regForm.$invalid">Register</button>
+</div>
+
