@@ -1,6 +1,6 @@
 
-      <div class="event col-xs-12 col-md-12" ng-controller="eventController">
-      	<div class=" form-background text-center" ng-if="events == ''">
+      <div class="event" ng-controller="eventController">
+      	<div class="form-background text-center" ng-if="events == ''">
             <h3><p>Thank you for registering {{ user.first_name }}!</p></h3><br>
       	    <p>The first step is to create your event so that you can manage your guest list. <a href ng-click="changeView('create')">Click here to create an event.</a></p>
       	</div>
@@ -29,15 +29,23 @@
                                                     <form role="form" name="guestForm" class="form-horizontal" ng-submit="addGuest(guestForm.$valid, events.event_code, 'add')" id="addGuest" novalidate>
 
                                                         <!-- GUEST NAME -->
-                                                        <div ng-class="{ 'has-error' : guestForm.guestName.$touched && guestForm.guestName.$invalid }" class="form-group col-sm-6">
+                                                        <div ng-class="{ 'has-error' : guestForm.guestName.$touched && guestForm.guestName.$invalid }" class="form-group col-sm-5">
                                                             <span class="alert" ng-show="guestForm.guestName.$touched && guestForm.guestName.$invalid">This field is required.</span>
                                                             <input type="text" class="form-control" name="guestName" id="guestName" value="" placeholder="First and Last Name" ng-model="formData.guestName" required>
                                                         </div>
 
                                                         <!-- ADDITIONAL GUESTS -->
-                                                        <div ng-class="{ 'has-error' : guestForm.addGuest.$touched && guestForm.addGuest.$invalid }" class="form-group col-sm-3">
+                                                        <div ng-class="{ 'has-error' : guestForm.addGuest.$touched && guestForm.addGuest.$invalid }" class="form-group col-sm-2">
                                                             <span class="alert" ng-show="guestForm.addGuest.$touched && guestForm.addGuest.$invalid">This field is required.</span>
                                                             <input type="text" class="form-control" name="addGuest" id="addGuest" value="" placeholder="Additional Guests" ng-model="formData.addGuest" required>
+                                                        </div>
+
+                                                        <div class="form-group col-sm-1">
+                                                            <p>Attending?</p>
+                                                            <select name="attending">
+                                                                <option value="Y"> Yes </option>
+                                                                <option value="N"> No </option>
+                                                            </select>
                                                         </div>
 
                                                         <!-- SUBMIT BUTTON -->
