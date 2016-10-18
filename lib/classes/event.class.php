@@ -17,6 +17,7 @@ class Event extends DatabaseConnection {
   public $guestList;
   public $eventInfoArray;
   public $guestCount;
+  public $attending;
 
   /**
    * Add guest to guest list
@@ -25,19 +26,21 @@ class Event extends DatabaseConnection {
    * @param string $lastName  Last name of guest
    * @param string $addGuests Number of additional guests
    */
-  public function addToGuestList($eventCode, $guestName, $addGuests) {
+  public function addToGuestList($eventCode, $guestName, $addGuests, $attending) {
     $this->eventCode = $eventCode;
     $this->guestName = $guestName;
     $this->addGuests = $addGuests;
+    $this->attending = $attending;
 
     if (strlen($this->eventCode) > 8 || !preg_match('/\D{4}\d{4}/', $this->eventCode)) { //If eventCode is more than eight characters or not 4 letters followed by 4 numbers
         return FALSE;
         die("Not valid event code");
     } else {
         //Insert into DB
-        $this->preparedQuery("INSERT into $this->eventCode (guest_name, add_guest) VALUES ( :guestname, :addguests)");
+        $this->preparedQuery("INSERT into $this->eventCode (guest_name, add_guest, attending) VALUES ( :guestname, :addguests, :attending)");
         $this->bind(':guestname', $this->guestName);
         $this->bind(':addguests', $this->addGuests);
+        $this->bind(':attending', $this->attending);
         $this->execute();
         return TRUE;
     }

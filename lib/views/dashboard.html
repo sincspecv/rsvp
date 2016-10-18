@@ -40,9 +40,9 @@
                                                             <input type="text" class="form-control" name="addGuest" id="addGuest" value="" placeholder="Additional Guests" ng-model="formData.addGuest" required>
                                                         </div>
 
-                                                        <div class="form-group col-sm-1">
-                                                            <p>Attending?</p>
-                                                            <select name="attending">
+                                                        <div class="form-group row col-sm-2">
+                                                            <p><strong>Attending?</strong></p>
+                                                            <select name="attending" name="attending" id="attending" ng-model="formData.attending">
                                                                 <option value="Y"> Yes </option>
                                                                 <option value="N"> No </option>
                                                             </select>

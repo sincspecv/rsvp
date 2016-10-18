@@ -9,7 +9,7 @@ $event = new Event();
 if ($_POST['method'] == 'add') {
 
     $guestName = filter_var(trim($_POST['guestName']), FILTER_SANITIZE_STRING);
-    $addGuest = trim($_POST['addGuest']);
+    $addGuest = filter_var(trim($_POST['addGuest']), FILTER_SANITIZE_NUMBER_INT);
     $eventCode = filter_var(trim($_POST['eventCode']), FILTER_SANITIZE_STRING);
     $attending = filter_var(trim($_POST['attending']), FILTER_SANITIZE_STRING);
 
@@ -23,7 +23,7 @@ if ($_POST['method'] == 'add') {
         $attending = "N";
     }
     //insert into db
-    if (!$event->addToGuestList($eventCode, $guestName, $addGuest)) {
+    if (!$event->addToGuestList($eventCode, $guestName, $addGuest, $attending)) {
         echo "Method Failed";
         header('Method Failed', true, 400);
     }
